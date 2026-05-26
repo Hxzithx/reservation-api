@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('customer_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('staff_id')->nullable()->constrained('staff')->nullOnDelete();
-            $table->foreignId('resource_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('customer_id')->constrained('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('service_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('staff_id')->nullable()->constrained('staff')->nullOnDelete();
+            $table->unsignedBigInteger('resource_id')->nullable()->constrained()->nullOnDelete();
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->enum('status', ['pending', 'confirmed', 'cancelled', 'completed'])->default('pending');
