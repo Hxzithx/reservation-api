@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('business_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
