@@ -48,11 +48,13 @@ class Business extends Model
         'isVat',
         'tax_number',
         'is_delete',
+        'extra_info',
     ];
 
     protected function casts(): array
     {
         return [
+            'extra_info'  => 'array',
             'is_active'   => 'boolean',
             'isVat'       => 'boolean',
             'is_delete'   => 'boolean',
