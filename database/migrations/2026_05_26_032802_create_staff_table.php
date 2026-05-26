@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('business_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone', 20)->nullable();

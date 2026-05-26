@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('business_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('type')->nullable(); // room, chair, equipment, etc.
             $table->text('description')->nullable();

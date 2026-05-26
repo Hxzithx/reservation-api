@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('availabilities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('staff_id')->constrained('staff')->cascadeOnDelete();
+            $table->unsignedBigInteger('staff_id')->constrained('staff')->cascadeOnDelete();
             $table->tinyInteger('day_of_week'); // 0=Sunday, 1=Monday, ..., 6=Saturday
             $table->time('start_time');
             $table->time('end_time');
