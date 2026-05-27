@@ -17,22 +17,33 @@ class Resource extends Model
         'capacity',
         'description',
         'photos',
+        'job_title',
+        'qualification',
+        'years_experience',
+        'languages',
+        'gender',
+        'bio',
         'display_order',
         'data',
         'is_active',
+        'is_delete',
+        'created_user',
+        'updated_by',
     ];
 
     protected function casts(): array
     {
         return [
-            'photos'    => 'array',
-            'data'      => 'array',
-            'is_active' => 'boolean',
-            'deleted_at'=> 'datetime',
+            'photos'           => 'array',
+            'languages'        => 'array',
+            'data'             => 'array',
+            'is_active'        => 'boolean',
+            'is_delete'        => 'boolean',
+            'deleted_at'       => 'datetime',
         ];
     }
 
-    //Relationships
+    //Relationships 
 
     public function business()
     {
@@ -44,30 +55,28 @@ class Resource extends Model
         return $this->hasMany(Booking::class);
     }
 
-    public function services()
+    public function createdBy()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsTo(User::class, 'created_user');
     }
 
-    //Helpers 
-
-    public function getResourceTypeLabelAttribute(): string
+    public function updatedBy()
     {
-        return match($this->resource_type) {
-            'person'    => 'Person (staff / provider)',
-            'room'      => 'Room / space / venue',
-            'equipment' => 'Equipment / asset',
-            'timeslot'  => 'Time slot (virtual)',
-            default     => $this->resource_type,
-        };
+        return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function isAvailable(): bool
+    public function linkedUser()
     {
-        return $this->is_active;
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Type Checks
+    // // Get services this resource provides (stored as service_ids in data JSON)
+    // public function services()
+    // {
+    //     return Service::whereIn('id', $this->data['service_ids'] ?? [])->get();
+    // }
+
+    //Type Checks
 
     public function isPerson(): bool
     {
@@ -89,10 +98,26 @@ class Resource extends Model
         return $this->resource_type === 'timeslot';
     }
 
-    // Data Accessors
+    //Helpers 
+
+    public function getResourceTypeLabelAttribute(): string
+    {
+        return match($this->resource_type) {
+            'person'    => 'Person (staff / provider)',
+            'room'      => 'Room / space / venue',
+            'equipment' => 'Equipment / asset',
+            'timeslot'  => 'Time slot (virtual)',
+            default     => $this->resource_type,
+        };
+    }
 
     public function getData(string $key, mixed $default = null): mixed
     {
         return $this->data[$key] ?? $default;
+    }
+
+    public function isAvailable(): bool
+    {
+        return $this->is_active && !$this->is_delete;
     }
 }
