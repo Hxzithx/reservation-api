@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('business_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('type')->nullable(); // room, chair, equipment, etc.
+            $table->string('type')->nullable(); // room, chair, equipment, staff, etc.
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
