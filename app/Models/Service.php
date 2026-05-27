@@ -50,6 +50,7 @@ class Service extends Model
 
         // Custom Requirements
         'booking_requirements',
+        'data',
     ];
 
     protected function casts(): array
@@ -66,6 +67,7 @@ class Service extends Model
             'available_from'       => 'datetime:H:i',
             'available_until'      => 'datetime:H:i',
             'deleted_at'           => 'datetime',
+            'data'                 => 'array',
         ];
     }
 
