@@ -85,7 +85,7 @@ class Service extends Model
 
     public function staff()
     {
-        return $this->belongsToMany(Staff::class, 'staff_services');
+        return $this->belongsToMany(Resource::class, 'staff_services');
     }
 
     public function resources()
