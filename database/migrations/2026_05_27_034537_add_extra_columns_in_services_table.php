@@ -15,6 +15,8 @@ return new class extends Migration
             $table->integer('duration')->default(60); // minutes
             $table->integer('buffer_after')->default(0); //minutes
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('category')->nullable();
+            $table->string('location_notes')->nullable();
 
             //pricing
             $table->decimal('base_price', 10, 2)->default(0);
