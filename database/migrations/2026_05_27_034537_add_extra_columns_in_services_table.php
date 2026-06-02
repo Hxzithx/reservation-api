@@ -24,7 +24,7 @@ return new class extends Migration
             $table->decimal('peak_price', 10, 2)->nullable(); //when price change in peak times (weekends, season)
             $table->decimal('deposit', 10, 2)->default(0)->nullable(); //how much customer have to pay before make an appointment 
             $table->decimal('group_price', 10, 2)->nullable(); //when customers book as a group the discounts price per person
-            $table->string('currency', 10)->default('LKR');
+            $table->enum('currency', ['USD', 'LKR', 'AED', 'EUR'])->default('USD');
 
             //availability
             $table->json('available_days'); //[MON,TUE,....]
