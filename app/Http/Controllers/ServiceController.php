@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -35,6 +36,11 @@ class ServiceController extends Controller implements HasMiddleware
               'message' => 'Unauthorize to view services',
               'error' => $e->getMessage(),
             ],403);
+        }catch (Exception $e){
+            return response()->json([
+               'message' => 'An error occured while retrieving services',
+               'error' => $e->getMessage(),
+            ],500);
         }
     }
 }
