@@ -15,17 +15,37 @@ return new class extends Migration
             $table->string('resource_name', 80);
             $table->string('short_code', 10)->nullable()->unique();
             $table->integer('capacity')->default(1);
-            $table->text('description')->nullable();
             $table->json('photos')->nullable();
+            $table->integer('display_order')->default(1);
+            $table->text('description')->nullable();
+
             $table->string('job_title')->nullable();
             $table->string('qualification')->nullable();
             $table->integer('years_experience')->nullable();
             $table->json('languages')->nullable();
             $table->string('gender')->default('any');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->text('bio')->nullable();
-            $table->integer('display_order')->default(1);
-            $table->json('data')->nullable();
+
+            $table->json('custom_attributes')->nullable();
+
+            $table->decimal('base_price', 10, 2)->default(0);
+            $table->enum('pricing_unit', ['Fixed price', 'Per hour', 'Per hour', 'Per day/Overnight', 'Per stay']);
+            $table->integer('buffer_after')->nullable()->default(0);
+            $table->integer('cancellation_window')->nullable()->default(24);
+            $table->integer('max_bookings_per_day')->nullable();
+            $table->integer('min_notice')->nullable()->default(2);
+            
             $table->boolean('is_active')->default(true);
+            $table->boolean('require_approval')->default(false); 
+            $table->boolean('allow_reschedule')->default(true);  
+            $table->boolean('allow_online_payment')->default(true);
+            $table->boolean('allow_pay_on_arrival')->default(false); 
+            $table->boolean('send_auto_reminders')->default(true); 
+            $table->boolean('request_review_after')->default(true);
+
+            $table->json('data')->nullable();
+
             $table->boolean('is_delete')->default(false);
             $table->unsignedBigInteger('created_user')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -33,6 +53,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreign('business_id')->references('id')->on('businesses')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
             $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();
         });
