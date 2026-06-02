@@ -16,6 +16,8 @@ class Service extends Model
         'duration',
         'buffer_after',
         'status',
+        'category',
+        'location_notes',
 
         // Pricing
         'base_price',

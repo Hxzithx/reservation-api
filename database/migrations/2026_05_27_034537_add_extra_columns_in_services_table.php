@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('services', function (Blueprint $table) {
             $table->integer('duration')->default(60); // minutes
             $table->integer('buffer_after')->default(0); //minutes
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['active', 'inactive', 'draft'])->default('active');
             $table->string('category')->nullable();
             $table->string('location_notes')->nullable();
 
@@ -33,9 +33,9 @@ return new class extends Migration
             $table->enum('seasonal_availability', ['all_year', 'season', 'off_season'])->default('all_year');
 
             //booking rules
-            $table->integer('max_advance_days')->default(60); //how many days ahead a customer can book
-            $table->integer('min_notice_hours')->default(2); //how many hours before the appointment a customer must book
-            $table->integer('cancel_window_hours')->default(24); //cancel deadline for refund
+            $table->integer('max_advance_booking')->nullable()->default(60); //how many days ahead a customer can book
+            $table->integer('min_notice')->nullable()->default(2); //how many hours before the appointment a customer must book
+            $table->integer('cancellation_window')->nullable()->default(24); //cancel deadline for refund
             $table->integer('max_bookings_per_day')->nullable();
             $table->enum('confirmation', ['auto', 'manual'])->default('auto');
             $table->boolean('enable_waitlist')->default(false);
