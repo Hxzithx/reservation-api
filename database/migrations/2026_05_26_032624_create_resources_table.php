@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('display_order')->default(1);
             $table->text('description')->nullable();
 
+            //staff
             $table->string('job_title')->nullable();
             $table->string('qualification')->nullable();
             $table->integer('years_experience')->nullable();
@@ -26,6 +27,14 @@ return new class extends Migration
             $table->string('gender')->default('any');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->text('bio')->nullable();
+
+            //room
+            $table->string('room_type')->nullable();
+            $table->string('floor')->nullable();
+            $table->decimal('area', 8, 2)->nullable();
+            $table->enum('pricing_model', ['Per night', 'Per hour', 'Per day', 'Per event'])->nullable()->default('Per night');
+            $table->integer('min_stay')->nullable();
+            $table->string('amenities')->nullable();
 
             $table->json('custom_attributes')->nullable();
 
