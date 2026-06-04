@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('type'); // salon, clinic, hotel, etc.
+            $table->string('type'); 
             $table->string('phone', 20)->nullable();
             $table->text('address')->nullable();
             $table->text('description')->nullable();
