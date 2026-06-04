@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
@@ -18,5 +19,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/resources')->group(function () {
         Route::get('/', [ResourcesController::class, 'index']);
         Route::get('/create', [ResourcesController::class, 'store']);
+    });
+    Route::prefix('/booking')->group(function () {
+       Route::get('/', [BookingController::class, 'index']);
+       Route::get('/create', [BookingController::class, 'create']);
+       Route::patch('/update', [BookingController::class, 'update']);
+       Route::patch('/{booking}/status', [BookingController::class, 'updateStatus']); 
+       Route::get('/history', [BookingController::class, 'search']);
     });
 });
