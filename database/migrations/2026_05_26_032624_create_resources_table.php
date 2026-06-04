@@ -36,6 +36,14 @@ return new class extends Migration
             $table->integer('min_stay')->nullable();
             $table->string('amenities')->nullable();
 
+            //equipment
+            $table->enum('equipment_category', ['Audio / PA', 'Lighting', 'Medical device', 'Kitchen equipment', 'Sport gear', 'Other'])->nullable()->default('Audio / PA');
+            $table->string('brand_model')->nullable();
+            $table->string('serial_number')->nullable();
+            $table->enum('condition', ['Excellent', 'Good', 'Fair', 'Needs to service'])->nullable()->default('Excellent'); 
+            $table->decimal('hire_rate', 10, 2)->nullable();
+            $table->decimal('deposit_required', 10, 2)->nullable();
+
             $table->json('custom_attributes')->nullable();
 
             $table->decimal('base_price', 10, 2)->default(0);
