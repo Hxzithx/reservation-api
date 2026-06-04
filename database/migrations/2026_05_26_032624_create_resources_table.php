@@ -37,12 +37,18 @@ return new class extends Migration
             $table->string('amenities')->nullable();
 
             //equipment
-            $table->enum('equipment_category', ['Audio / PA', 'Lighting', 'Medical device', 'Kitchen equipment', 'Sport gear', 'Other'])->nullable()->default('Audio / PA');
+            $table->enum('equipment_category', ['Audio / PA', 'Lighting', 'Medical device', 'Kitchen equipment', 'Sport gear', 'Other'])->default('Audio / PA');
             $table->string('brand_model')->nullable();
             $table->string('serial_number')->nullable();
-            $table->enum('condition', ['Excellent', 'Good', 'Fair', 'Needs to service'])->nullable()->default('Excellent'); 
+            $table->enum('condition', ['Excellent', 'Good', 'Fair', 'Needs to service'])->default('Excellent'); 
             $table->decimal('hire_rate', 10, 2)->nullable();
             $table->decimal('deposit_required', 10, 2)->nullable();
+
+            //time slot
+            $table->enum('slot_category', ['Appointment', 'Class / Group session', 'Consultation', 'Delivery / pickup'])->default('Appointment'); 
+            $table->enum('virtual_type', ['Virtual only', 'In-person only', 'Both available'])->default('Virtual only');
+            $table->string('video_link')->nullable();
+            $table->integer('max_group_size')->nullable();
 
             $table->json('custom_attributes')->nullable();
 
