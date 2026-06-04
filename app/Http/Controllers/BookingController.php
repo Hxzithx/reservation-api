@@ -269,4 +269,65 @@ class BookingController extends Controller implements HasMiddleware
             ], 500);
         }
     }
+
+    public function history(Request $request)
+    {
+        try {
+            Gate::authorize('viewAny', Booking::class);
+
+            $fields = $request->validate([
+                // 'business_id' => 'required|exists:businesses,id',
+                'customer_id' => 'nullable|exists:users,id',
+                'status'      => 'nullable|in:pending,confirmed,cancelled,completed',
+                'from_date'   => 'nullable|date',
+                'to_date'     => 'nullable|date|after_or_equal:from_date',
+                'per_page'    => 'nullable|integer|min:1|max:100',
+            ]);
+
+            $query = Booking::where('business_id', $fields['business_id'])
+                ->where('is_delete', false);
+
+            // Filter by customer
+            if (!empty($fields['customer_id'])) {
+                $query->where('customer_id', $fields['customer_id']);
+            }
+
+            // Filter by status
+            if (!empty($fields['status'])) {
+                $query->where('status', $fields['status']);
+            }
+
+            // Filter by date range
+            if (!empty($fields['from_date'])) {
+                $query->whereDate('date', '>=', $fields['from_date']);
+            }
+
+            if (!empty($fields['to_date'])) {
+                $query->whereDate('date', '<=', $fields['to_date']);
+            }
+
+            $bookings = $query->orderBy('date', 'desc')
+                ->paginate($fields['per_page'] ?? 15);
+
+            return response()->json([
+                'message'  => 'Booking history retrieved successfully',
+                'bookings' => $bookings,
+            ], 200);
+        } catch (AuthorizationException $e) {
+            return response()->json([
+                'message' => 'Unauthorized to view booking history',
+                'error'   => $e->getMessage(),
+            ], 403);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'error'   => $e->errors(),
+            ], 422);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred while retrieving booking history',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
