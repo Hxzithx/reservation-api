@@ -48,7 +48,15 @@ return new class extends Migration
 
             $table->json('data')->nullable();
 
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_delete')->default(false);
+            $table->unsignedBigInteger('created_user')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
+            $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();
         });
     }
 
