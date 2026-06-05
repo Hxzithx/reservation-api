@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SystemSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,10 +22,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/create', [ResourcesController::class, 'store']);
     });
     Route::prefix('/booking')->group(function () {
-       Route::get('/', [BookingController::class, 'index']);
-       Route::get('/create', [BookingController::class, 'create']);
-       Route::patch('/update', [BookingController::class, 'update']);
-       Route::patch('/{booking}/status', [BookingController::class, 'updateStatus']); 
-       Route::get('/history', [BookingController::class, 'search']);
+        Route::get('/', [BookingController::class, 'index']);
+        Route::get('/create', [BookingController::class, 'store']);
+        Route::patch('/update', [BookingController::class, 'update']);
+        Route::patch('/{booking}/status', [BookingController::class, 'updateStatus']);
+        Route::get('/history', [BookingController::class, 'search']);
+    });
+    Route::prefix('/system-setting')->group(function () {
+        Route::get('/', [SystemSettingController::class, 'index']);
+        Route::get('/create', [SystemSettingController::class, 'store']);
+        Route::patch('/update', [SystemSettingController::class, 'update']);
     });
 });
