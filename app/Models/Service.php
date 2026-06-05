@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Override;
 
 class Service extends Model
 {
@@ -73,13 +74,55 @@ class Service extends Model
         ];
     }
 
-    // ─── Relationships ────────────────────────────────────────────────
-
-    public function business()
+    #[Override]
+    protected static function booted(): void
     {
-        return $this->belongsTo(Business::class);
+        static::creating(function ($service) {
+            $service->data = self::buildData($service);
+        });
+
+        static::updating(function ($service) {
+            $service->data = self::buildData($service);
+        });
     }
 
+    private static function buildData($service): array
+    {
+        return [
+            'business_id' => $service->business_id,
+            'name' => $service->name,
+            'description' => $service->description,
+            'duration' => $service->duration,
+            'buffer_after' => $service->buffer_after,
+            'status' => $service->status,
+            'category' => $service->category,
+            'location_notes' => $service->location_notes,
+            'base_price' => $service->base_price,
+            'member_price' => $service->member_price,
+            'peak_price' => $service->peak_price,
+            'deposit' => $service->deposit,
+            'group_price' => $service->group_price,
+            'currency' => $service->currency,
+            'available_days' => $service->available_days,
+            'available_from' => $service->available_from,
+            'available_until' => $service->available_until,
+            'seasonal_availability' => $service->seasonal_availability,
+            'booking_window_days' => $service->booking_window_days,
+            'advance_notice_hours' => $service->advance_notice_hours,
+            'free_cancel_hours' => $service->free_cancel_hours,
+            'max_bookings_per_day' => $service->max_bookings_per_day,
+            'confirmation' => $service->confirmation,
+            'enable_waitlist' => $service->enable_waitlist,
+            'min_group_size' => $service->min_group_size,
+            'max_group_size' => $service->max_group_size,
+            'skill_level_required' => $service->skill_level_required,
+            'remind_before_minutes' => $service->remind_before_minutes,
+            'reminder_channel' => $service->reminder_channel,
+            'booking_requirements' => $service->booking_requirements,
+        ];
+    }
+
+    // Relationships 
     public function bookings()
     {
         return $this->hasMany(Booking::class);
@@ -95,7 +138,7 @@ class Service extends Model
         return $this->belongsToMany(Resource::class);
     }
 
-    // ─── Helpers ──────────────────────────────────────────────────────
+    //Helpers 
 
     public function isAvailableOn(string $day): bool
     {
