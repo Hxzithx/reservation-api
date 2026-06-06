@@ -43,81 +43,68 @@ class Resource extends Model
         ];
     }
 
-    //Relationships 
+    protected static function booted(): void
+{
+    static::creating(function ($resource) {
+        $resource->data = self::buildData($resource);
+    });
 
-    public function business()
-    {
-        return $this->belongsTo(Business::class);
-    }
+    static::updating(function ($resource) {
+        $resource->data = self::buildData($resource);
+    });
+}
 
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class);
-    }
+private static function buildData($resource): array
+{
+    $common = [
+        'business_id'   => $resource->business_id,
+        'resource_type' => $resource->resource_type,
+        'resource_name' => $resource->resource_name,
+        'short_code'    => $resource->short_code,
+        'capacity'      => $resource->capacity,
+        'description'   => $resource->description,
+        'photos'        => $resource->photos,
+        'display_order' => $resource->display_order,
+        'is_active'     => $resource->is_active,
+        'is_delete'     => $resource->is_delete,
+        'created_user'  => $resource->created_user,
+        'updated_by'    => $resource->updated_by,
+    ];
 
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_user');
-    }
+    $typeSpecific = match($resource->resource_type) {
+        'person' => [
+            'job_title'        => $resource->job_title,
+            'qualification'    => $resource->qualification,
+            'years_experience' => $resource->years_experience,
+            'languages'        => $resource->languages,
+            'gender'           => $resource->gender,
+            'bio'              => $resource->bio,
+        ],
+        'room' => [
+            'room_type'     => $resource->room_type,
+            'floor'         => $resource->floor,
+            'area'          => $resource->area,
+            'pricing_model' => $resource->pricing_model,
+            'min_stay'      => $resource->min_stay,
+            'amenities'     => $resource->amenities,
+        ],
+        'equipment' => [
+            'equipment_category' => $resource->equipment_category,
+            'brand_model'        => $resource->brand_model,
+            'serial_number'      => $resource->serial_number,
+            'condition'          => $resource->condition,
+            'hire_rate'          => $resource->hire_rate,
+            'deposit_required'   => $resource->deposit_required,
+        ],
+        'timeslot' => [
+            'slot_category' => $resource->slot_category,
+            'virtual_type'  => $resource->virtual_type,
+            'video_link'    => $resource->video_link,
+            'max_group_size'=> $resource->max_group_size,
+        ],
+        default => [],
+    };
 
-    public function updatedBy()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
-
-    public function linkedUser()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    // // Get services this resource provides (stored as service_ids in data JSON)
-    // public function services()
-    // {
-    //     return Service::whereIn('id', $this->data['service_ids'] ?? [])->get();
-    // }
-
-    //Type Checks
-
-    public function isPerson(): bool
-    {
-        return $this->resource_type === 'person';
-    }
-
-    public function isRoom(): bool
-    {
-        return $this->resource_type === 'room';
-    }
-
-    public function isEquipment(): bool
-    {
-        return $this->resource_type === 'equipment';
-    }
-
-    public function isTimeslot(): bool
-    {
-        return $this->resource_type === 'timeslot';
-    }
-
-    //Helpers 
-
-    public function getResourceTypeLabelAttribute(): string
-    {
-        return match($this->resource_type) {
-            'person'    => 'Person (staff / provider)',
-            'room'      => 'Room / space / venue',
-            'equipment' => 'Equipment / asset',
-            'timeslot'  => 'Time slot (virtual)',
-            default     => $this->resource_type,
-        };
-    }
-
-    public function getData(string $key, mixed $default = null): mixed
-    {
-        return $this->data[$key] ?? $default;
-    }
-
-    public function isAvailable(): bool
-    {
-        return $this->is_active && !$this->is_delete;
-    }
+    return array_merge($common, $typeSpecific);
+}
 }
