@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('business_id');
+            // $table->unsignedBigInteger('business_id');
             $table->string('resource_type');
             $table->string('resource_name', 80);
             $table->string('short_code', 10)->nullable()->unique();
@@ -75,7 +75,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('business_id')->references('id')->on('businesses')->cascadeOnDelete();
+            // $table->foreign('business_id')->references('id')->on('businesses')->cascadeOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
             $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();

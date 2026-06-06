@@ -26,7 +26,8 @@ class SystemSettingController extends Controller implements HasMiddleware
         try {
             Gate::authorize('viewAny', SystemSetting::class);
 
-            $setting = SystemSetting::where('is_delete', false)->first();
+            // $setting = SystemSetting::where('is_delete', false)->first();
+            $setting = SystemSetting::all();
 
             if (!$setting) {
                 return response()->json([

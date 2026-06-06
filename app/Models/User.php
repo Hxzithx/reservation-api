@@ -24,9 +24,10 @@ class User extends Model
     protected function casts(): array
     {
         return [
+            'data'       => 'array',
             'is_active'  => 'boolean',
             'is_delete'  => 'boolean',
-            'deleted_at' => 'datetime',
+            'deleted_at' => 'datetime',  
         ];
     }
 

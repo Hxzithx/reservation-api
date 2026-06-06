@@ -59,7 +59,7 @@ class SystemSetting extends Model
         });
 
         static::creating(function ($systemSetting) {
-            $systemSetting->data = self::buldData($systemSetting);
+            $systemSetting->data = self::buildData($systemSetting);
         });
     }
 

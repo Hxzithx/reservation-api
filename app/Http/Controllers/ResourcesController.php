@@ -26,9 +26,10 @@ class ResourcesController extends Controller implements HasMiddleware
         try {
             Gate::authorize('viewAny', Resource::class);
 
-            $resources = Resource::where('business_id', $request->business_id)
-                ->where('is_delete', false)
-                ->get();
+            // $resources = Resource::where('business_id', $request->business_id)
+            //     ->where('is_delete', false)
+            //     ->get();
+            $resources = Resource::all();
 
             return response()->json([
                 'message'   => 'Resources retrieved successfully',
@@ -53,7 +54,7 @@ class ResourcesController extends Controller implements HasMiddleware
             Gate::authorize('create', Resource::class);
 
             $fields = $request->validate([
-                'business_id'               => 'required|exists:businesses,id',
+                // 'business_id'               => 'required|exists:businesses,id',
 
                 'resource_type'             => 'required|in:person,room,equipment,timeslot',
                 'resource_name'             => 'required|string|max:80',

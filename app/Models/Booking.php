@@ -79,36 +79,4 @@ class Booking extends Model
             $booking->booking_reference = self::generateReference($booking->service_id);
         });
     }
-
-    //Relationships
-
-    public function business()
-    {
-        return $this->belongsTo(Business::class);
-    }
-
-    public function customer()
-    {
-        return $this->belongsTo(User::class, 'customer_id');
-    }
-
-    public function service()
-    {
-        return $this->belongsTo(Service::class);
-    }
-
-    public function resource()
-    {
-        return $this->belongsTo(Resource::class);
-    }
-
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_user');
-    }
-
-    public function updatedBy()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
 }

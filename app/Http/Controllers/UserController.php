@@ -27,7 +27,8 @@ class UserController extends Controller implements HasMiddleware
         try {
             Gate::authorize('viewAny', User::class);
 
-            $users = User::where('is_delete', false)->get();
+            // $users = User::where('is_delete', false)->get();
+            $users = User::all();
 
             return response()->json([
                 'message' => 'Users retrieved successfully',
