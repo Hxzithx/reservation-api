@@ -17,14 +17,14 @@ class BookingController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum'),
+            // new Middleware('auth:sanctum'),
         ];
     }
 
     public function index()
     {
         try {
-            Gate::authorize('viewAny', Booking::class);
+            // Gate::authorize('viewAny', Booking::class);
 
             $bookings = Booking::all();
 
@@ -48,7 +48,7 @@ class BookingController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         try {
-            Gate::authorize('create', Booking::class);
+            // Gate::authorize('create', Booking::class);
 
             $fields = $request->validate([
                 // 'business_id'              => 'required|exists:businesses,id',
@@ -108,7 +108,7 @@ class BookingController extends Controller implements HasMiddleware
     public function show(Booking $booking)
     {
         try {
-            Gate::authorize('view', $booking);
+            // Gate::authorize('view', $booking);
 
             return response()->json([
                 'message' => 'Booking retrieved successfully',
@@ -135,7 +135,7 @@ class BookingController extends Controller implements HasMiddleware
     public function update(Request $request, Booking $booking)
     {
         try {
-            Gate::authorize('update', $booking);
+            // Gate::authorize('update', $booking);
 
             $fields = $request->validate([
                 'customer_id'              => 'sometimes|nullable|exists:users,id',
@@ -202,7 +202,7 @@ class BookingController extends Controller implements HasMiddleware
     public function destroy(Booking $booking)
     {
         try {
-            Gate::authorize('delete', $booking);
+            // Gate::authorize('delete', $booking);
 
             $booking->update(['is_delete' => true]);
             $booking->delete();
@@ -240,7 +240,7 @@ class BookingController extends Controller implements HasMiddleware
     public function updateStatus(Request $request, Booking $booking)
     {
         try {
-            Gate::authorize('update', $booking);
+            // Gate::authorize('update', $booking);
 
             $fields = $request->validate([
                 'status' => 'required|in:pending,confirmed,cancelled,completed',
@@ -273,7 +273,7 @@ class BookingController extends Controller implements HasMiddleware
     public function history(Request $request)
     {
         try {
-            Gate::authorize('viewAny', Booking::class);
+            // Gate::authorize('viewAny', Booking::class);
 
             $fields = $request->validate([
                 // 'business_id' => 'required|exists:businesses,id',

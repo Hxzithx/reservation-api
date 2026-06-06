@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique()->nullable();
-            $table->enum('role', ['admin', 'staff', 'customer'])->default('customer');
+            $table->enum('role', ['admin', 'receptionist'])->default('receptionist');
             $table->string('phone', 20)->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('is_active')->default(true);

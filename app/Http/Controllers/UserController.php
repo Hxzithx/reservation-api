@@ -18,14 +18,14 @@ class UserController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum'),
+            // new Middleware('auth:sanctum'),
         ];
     }
 
     public function index()
     {
         try {
-            Gate::authorize('viewAny', User::class);
+            // Gate::authorize('viewAny', User::class);
 
             // $users = User::where('is_delete', false)->get();
             $users = User::all();
@@ -50,12 +50,12 @@ class UserController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         try {
-            Gate::authorize('create', User::class);
+            // Gate::authorize('create', User::class);
 
             $fields = $request->validate([
                 'name'     => 'required|string|max:255',
                 'email'    => 'required|email|unique:users,email',
-                'role'     => 'required|in:admin,staff,customer',
+                'role'     => 'required|in:admin,receptionist',
                 'phone'    => 'nullable|string|max:20',
                 'avatar'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             ]);
@@ -92,7 +92,7 @@ class UserController extends Controller implements HasMiddleware
     public function show(User $user)
     {
         try {
-            Gate::authorize('view', $user);
+            // Gate::authorize('view', $user);
 
             return response()->json([
                 'message' => 'User retrieved successfully',
@@ -119,12 +119,12 @@ class UserController extends Controller implements HasMiddleware
     public function update(Request $request, User $user)
     {
         try {
-            Gate::authorize('update', $user);
+            // Gate::authorize('update', $user);
 
             $fields = $request->validate([
                 'name'     => 'sometimes|required|string|max:255',
                 'email'    => 'sometimes|required|email|unique:users,email,' . $user->id,
-                'role'     => 'sometimes|required|in:admin,staff,customer',
+                'role'     => 'sometimes|required|in:admin,receptionist',
                 'phone'    => 'sometimes|nullable|string|max:20',
                 'avatar'   => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
                 'is_active'=> 'sometimes|boolean',
@@ -169,7 +169,7 @@ class UserController extends Controller implements HasMiddleware
     public function destroy(User $user)
     {
         try {
-            Gate::authorize('delete', $user);
+            // Gate::authorize('delete', $user);
 
             $user->update(['is_delete' => true]);
             $user->delete();
@@ -207,7 +207,7 @@ class UserController extends Controller implements HasMiddleware
     public function byRole(string $role)
     {
         try {
-            Gate::authorize('viewAny', User::class);
+            // Gate::authorize('viewAny', User::class);
 
             $users = User::where('role', $role)
                 ->where('is_delete', false)
@@ -233,7 +233,7 @@ class UserController extends Controller implements HasMiddleware
     public function toggleStatus(Request $request, User $user)
     {
         try {
-            Gate::authorize('update', $user);
+            // Gate::authorize('update', $user);
 
             $user->update([
                 'is_active'  => !$user->is_active,
