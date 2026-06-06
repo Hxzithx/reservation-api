@@ -2,60 +2,48 @@
 
 namespace App\Models;
 
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Model
 {
-    /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
         'email',
-        'password',
         'role',
         'phone',
-    ];
-
-    protected $hidden = [
-        'password',
-        'remember_token',
+        'avatar',
+        'is_active',
+        'is_delete',
+        'created_user',
+        'updated_by',
     ];
 
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
+            'is_active'  => 'boolean',
+            'is_delete'  => 'boolean',
+            'deleted_at' => 'datetime',
         ];
     }
+
+    // ─── Role Checks ──────────────────────────────────────────────────
 
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
 
+    public function isStaff(): bool
+    {
+        return $this->role === 'staff';
+    }
+
     public function isCustomer(): bool
     {
         return $this->role === 'customer';
-    }
-
-    public function business()
-    {
-        return $this->hasOne(Business::class);
-    }
-
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class, 'customer_id');
-    }
-
-    public function staffProfile()
-    {
-        return $this->hasOne(Resource::class);
     }
 }

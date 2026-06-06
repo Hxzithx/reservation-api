@@ -18,16 +18,17 @@ class ServiceController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum'),
+            // new Middleware('auth:sanctum'),
         ];
     }
 
     public function index(Request $request): JsonResponse
     {
         try {
-            Gate::authorize('viewAny', Service::class);
+            // Gate::authorize('viewAny', Service::class);
 
-            $services = Service::where('business_id', $request->business_id)->get();
+            // $services = Service::where('business_id', $request->business_id)->get();
+            $services = Service::all();
 
             return response()->json([
                 'message' => 'Services retrieved successfully',
@@ -49,7 +50,7 @@ class ServiceController extends Controller implements HasMiddleware
     public function store(Request $request, Service $services)
     {
         try {
-            Gate::authorize('create', Service::class);
+            // Gate::authorize('create', Service::class);
 
             $fields = $request->validate([
                 'business_id'                       => 'required|exists:businesses,id',
@@ -112,7 +113,7 @@ class ServiceController extends Controller implements HasMiddleware
     public function show(Service $service)
     {
         try {
-            Gate::authorize('view', $service);
+            // Gate::authorize('view', $service);
 
             return response()->json([
                 'message' => 'Service retrieved successfully',
@@ -139,7 +140,7 @@ class ServiceController extends Controller implements HasMiddleware
     public function update(Request $request, Service $service)
     {
         try {
-            Gate::authorize('update', $service);
+            // Gate::authorize('update', $service);
 
             $fields = $request->validate([
                 'name'                              => 'sometimes|required|string|max:255',
@@ -202,7 +203,7 @@ class ServiceController extends Controller implements HasMiddleware
     public function destroy(Service $service)
     {
         try {
-            Gate::authorize('delete', $service);
+            // Gate::authorize('delete', $service);
 
             $service->delete();
 
