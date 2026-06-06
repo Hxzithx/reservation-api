@@ -17,14 +17,14 @@ class ResourcesController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum'),
+            // new Middleware('auth:sanctum'),
         ];
     }
 
     public function index(Request $request)
     {
         try {
-            Gate::authorize('viewAny', Resource::class);
+            // Gate::authorize('viewAny', Resource::class);
 
             // $resources = Resource::where('business_id', $request->business_id)
             //     ->where('is_delete', false)

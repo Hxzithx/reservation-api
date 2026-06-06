@@ -17,14 +17,14 @@ class SystemSettingController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum'),
+            // new Middleware('auth:sanctum'),
         ];
     }
 
     public function index()
     {
         try {
-            Gate::authorize('viewAny', SystemSetting::class);
+            // Gate::authorize('viewAny', SystemSetting::class);
 
             // $setting = SystemSetting::where('is_delete', false)->first();
             $setting = SystemSetting::all();
