@@ -22,6 +22,8 @@ return new class extends Migration
             $table->boolean('is_delete')->default(false);
             $table->unsignedBigInteger('created_user')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
+
+            $table->json('data')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

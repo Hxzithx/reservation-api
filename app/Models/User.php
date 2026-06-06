@@ -30,7 +30,7 @@ class User extends Model
         ];
     }
 
-    // ─── Role Checks ──────────────────────────────────────────────────
+    // Role Checks
 
     public function isAdmin(): bool
     {
