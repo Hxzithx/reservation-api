@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Override;
 
 class SystemSetting extends Model
 {
@@ -34,7 +35,6 @@ class SystemSetting extends Model
         'header_font_size',
         'theme_color',
         'bank_details',
-        'data',
         'is_active',
         'is_delete',
         'created_user',
@@ -51,7 +51,51 @@ class SystemSetting extends Model
         ];
     }
 
-    // ─── Relationships ────────────────────────────────────────────────
+    #[Override]
+    public static function booted(): void
+    {
+        static::creating(function ($systemSetting) {
+            $systemSetting->data = self::buildData($systemSetting);
+        });
+
+        static::creating(function ($systemSetting) {
+            $systemSetting->data = self::buldData($systemSetting);
+        });
+    }
+
+    private static function buildData($systemSetting): array
+    {
+        return [
+            'company_name',
+            'email',
+            'mobile_number',
+            'telephone_number',
+            'website',
+            'address_line_1',
+            'address_line_2',
+            'address_line_3',
+            'city',
+            'district',
+            'province_state',
+            'postal_code',
+            'country',
+            'system_currency',
+            'header_display_type',
+            'company_logo',
+            'company_slogan',
+            'slogan_font_size',
+            'document_header_text',
+            'header_font_size',
+            'theme_color',
+            'bank_details',
+            'is_active',
+            'is_delete',
+            'created_user',
+            'updated_by',
+        ];
+    }
+
+    //Relationships 
 
     public function createdBy()
     {

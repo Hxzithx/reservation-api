@@ -86,7 +86,6 @@ class SystemSettingController extends Controller implements HasMiddleware
                 'header_font_size'      => 'nullable|integer|min:8|max:72',
                 'theme_color'           => 'nullable|string|max:7',
                 'bank_details'          => 'nullable|string',
-                'data'                  => 'nullable|array',
             ]);
 
             // Handle logo upload
@@ -148,7 +147,6 @@ class SystemSettingController extends Controller implements HasMiddleware
                 'header_font_size'      => 'sometimes|nullable|integer|min:8|max:72',
                 'theme_color'           => 'sometimes|nullable|string|max:7',
                 'bank_details'          => 'sometimes|nullable|string',
-                'data'                  => 'sometimes|nullable|array',
             ]);
 
             // Handle logo upload
