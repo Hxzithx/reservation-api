@@ -12,7 +12,7 @@ class ResourceSeeder extends Seeder
         $resources = [
             // Person / Staff
             [
-                // 'business_id'          => 1,
+                // 'company_id'          => 1,
                 'resource_type'        => 'person',
                 'resource_name'        => 'Dr. Silva',
                 'short_code'           => 'DR-SIL',
@@ -42,7 +42,7 @@ class ResourceSeeder extends Seeder
                 'is_delete'            => false,
             ],
             [
-                // 'business_id'          => 1,
+                // 'company_id'          => 1,
                 'resource_type'        => 'person',
                 'resource_name'        => 'Jane Perera',
                 'short_code'           => 'JP-001',
@@ -74,7 +74,7 @@ class ResourceSeeder extends Seeder
 
             // Room
             [
-                // 'business_id'          => 1,
+                // 'company_id'          => 1,
                 'resource_type'        => 'room',
                 'resource_name'        => 'Deluxe Suite',
                 'short_code'           => 'RM-DLX',
@@ -104,7 +104,7 @@ class ResourceSeeder extends Seeder
                 'is_delete'            => false,
             ],
             [
-                // 'business_id'          => 1,
+                // 'company_id'          => 1,
                 'resource_type'        => 'room',
                 'resource_name'        => 'Standard Room',
                 'short_code'           => 'RM-STD',
@@ -136,7 +136,7 @@ class ResourceSeeder extends Seeder
 
             // Equipment
             [
-                // 'business_id'          => 1,
+                // 'company_id'          => 1,
                 'resource_type'        => 'equipment',
                 'resource_name'        => 'Mixer A',
                 'short_code'           => 'MX-001',
@@ -168,7 +168,7 @@ class ResourceSeeder extends Seeder
 
             // Timeslot
             [
-                // 'business_id'          => 1,
+                // 'company_id'          => 1,
                 'resource_type'        => 'timeslot',
                 'resource_name'        => 'Morning Appointment',
                 'short_code'           => 'TS-MRN',

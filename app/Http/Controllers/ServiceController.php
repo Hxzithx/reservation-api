@@ -27,7 +27,7 @@ class ServiceController extends Controller implements HasMiddleware
         try {
             // Gate::authorize('viewAny', Service::class);
 
-            // $services = Service::where('business_id', $request->business_id)->get();
+            // $services = Service::where('company_id', $request->company_id)->get();
             $services = Service::all();
 
             return response()->json([
@@ -53,7 +53,7 @@ class ServiceController extends Controller implements HasMiddleware
             // Gate::authorize('create', Service::class);
 
             $fields = $request->validate([
-                'business_id'                       => 'required|exists:businesses,id',
+                'company_id'                       => 'required|exists:businesses,id',
                 'name'                              => 'required|string|max:255',
                 'status'                            => 'required|in:active,inactive,draft',
                 'category'                          => 'nullable|string|max:255',

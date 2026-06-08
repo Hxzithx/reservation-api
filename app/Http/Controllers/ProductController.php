@@ -27,7 +27,7 @@ class ProductController extends Controller implements HasMiddleware
         try {
             // Gate::authorize('viewAny', Product::class);
 
-            // $products = Product::where('business_id', $request->business_id)
+            // $products = Product::where('company_id', $request->company_id)
             //     ->where('is_delete', false)
             //     ->get();
             $products = Product::all();
@@ -56,7 +56,7 @@ class ProductController extends Controller implements HasMiddleware
             // Gate::authorize('create', Product::class);
 
             $fields = $request->validate([
-                'business_id'     => 'required|exists:businesses,id',
+                'company_id'     => 'required|exists:businesses,id',
                 'name'            => 'required|string|max:255',
                 'product_code'    => 'nullable|string|max:50|unique:products,product_code',
                 'barcode'         => 'nullable|string|max:50|unique:products,barcode',

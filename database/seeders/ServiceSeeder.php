@@ -11,7 +11,7 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             [
-                'business_id'           => 1,
+                'company_id'           => 1,
                 'name'                  => 'Haircut',
                 'status'                => 'active',
                 'duration'              => 30,
@@ -41,7 +41,7 @@ class ServiceSeeder extends Seeder
                 'booking_requirements'  => [],
             ],
             [
-                'business_id'           => 1,
+                'company_id'           => 1,
                 'name'                  => 'Massage',
                 'status'                => 'active',
                 'duration'              => 60,
@@ -78,7 +78,7 @@ class ServiceSeeder extends Seeder
                 ],
             ],
             [
-                'business_id'           => 1,
+                'company_id'           => 1,
                 'name'                  => 'Manicure',
                 'status'                => 'active',
                 'duration'              => 45,

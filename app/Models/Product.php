@@ -10,7 +10,7 @@ class Product extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'business_id',
+        // 'company_id',
         'name',
         'product_code',
         'barcode',
@@ -65,7 +65,7 @@ class Product extends Model
     private static function buildData($product): array
     {
         return [
-            'business_id'     => $product->business_id,
+            // 'business_id'     => $product->business_id,
             'name'            => $product->name,
             'sku'             => $product->sku,
             'barcode'         => $product->barcode,
