@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('business_id');
+            // $table->unsignedBigInteger('company_id');
 
             // Product Identity
             $table->string('name');
@@ -48,7 +48,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // $table->foreign('business_id')->references('id')->on('businesses')->cascadeOnDelete();
+            // $table->foreign('company_id')->references('id')->on('businesses')->cascadeOnDelete();
             $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();
         });

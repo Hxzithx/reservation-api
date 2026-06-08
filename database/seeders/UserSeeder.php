@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             [
                 'name'         => 'John Silva',
                 'email'        => 'john@example.com',
-                'role'         => 'staff',
+                'role'         => 'receptionist',
                 'phone'        => '+94772345678',
                 'is_active'    => true,
                 'is_delete'    => false,
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             [
                 'name'         => 'Jane Perera',
                 'email'        => 'jane@example.com',
-                'role'         => 'staff',
+                'role'         => 'receptionist',
                 'phone'        => '+94773456789',
                 'is_active'    => true,
                 'is_delete'    => false,
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             [
                 'name'         => 'Kasun Fernando',
                 'email'        => 'kasun@example.com',
-                'role'         => 'customer',
+                'role'         => 'receptionist',
                 'phone'        => '+94774567890',
                 'is_active'    => true,
                 'is_delete'    => false,
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             [
                 'name'         => 'Nimali Dias',
                 'email'        => 'nimali@example.com',
-                'role'         => 'customer',
+                'role'         => 'receptionist',
                 'phone'        => '+94775678901',
                 'is_active'    => true,
                 'is_delete'    => false,

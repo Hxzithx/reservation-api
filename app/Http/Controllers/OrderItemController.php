@@ -59,7 +59,7 @@ class OrderItemController extends Controller implements HasMiddleware
             // Gate::authorize('create', OrderItem::class);
 
             $fields = $request->validate([
-                'business_id' => 'required|exists:businesses,id',
+                'company_id' => 'required|exists:businesses,id',
                 'booking_id'  => 'required|exists:bookings,id',
                 'product_id'  => 'required|exists:products,id',
                 'customer_id' => 'nullable|exists:users,id',

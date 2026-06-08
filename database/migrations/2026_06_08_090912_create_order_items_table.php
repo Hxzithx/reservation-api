@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_items', function (Blueprint $table) {
             Schema::create('order_items', function (Blueprint $table) {
                 $table->id();
-                // $table->unsignedBigInteger('business_id');
+                // $table->unsignedBigInteger('company_id');
                 $table->unsignedBigInteger('booking_id')->nullable();
                 $table->unsignedBigInteger('product_id');
                 $table->unsignedBigInteger('customer_id')->nullable();
@@ -38,14 +37,13 @@ return new class extends Migration
                 $table->timestamps();
                 $table->softDeletes();
 
-                // $table->foreign('business_id')->references('id')->on('businesses')->cascadeOnDelete();
+                // $table->foreign('company_id')->references('id')->on('businesses')->cascadeOnDelete();
                 $table->foreign('booking_id')->references('id')->on('bookings')->nullOnDelete();
                 $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
                 $table->foreign('customer_id')->references('id')->on('users')->nullOnDelete();
                 $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
                 $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();
             });
-        });
     }
 
     /**
