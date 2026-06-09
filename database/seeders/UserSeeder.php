@@ -53,8 +53,7 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
-            $created = User::create($user);
-            $created->save();
+            User::create($user);
         }
     }
 }

@@ -67,7 +67,7 @@ class Product extends Model
         return [
             'company_id'     => $product->company_id,
             'name'            => $product->name,
-            'sku'             => $product->sku,
+            'product_code'    => $product->product_code,
             'barcode'         => $product->barcode,
             'description'     => $product->description,
             'category'        => $product->category,

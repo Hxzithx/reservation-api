@@ -198,8 +198,7 @@ class ResourceSeeder extends Seeder
         ];
 
         foreach ($resources as $resource) {
-            $created = Resource::create($resource);
-            $created->save();
+            Resource::create($resource);
         }
     }
 }

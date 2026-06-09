@@ -9,7 +9,6 @@ use App\Models\Service;
 use App\Models\Resource;
 use App\Models\Booking;
 use App\Models\SystemSetting;
-use App\Observers\ServiceObserver;
 use App\Policies\BusinessPolicy;
 use App\Policies\ServicePolicy;
 use App\Policies\ResourcePolicy;
@@ -31,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Service::observe(ServiceObserver::class);
+        //
     }
 }

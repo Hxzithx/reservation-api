@@ -98,8 +98,7 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            $created = Product::create($product);
-            $created->save();
+            Product::create($product);
         }
     }
 }

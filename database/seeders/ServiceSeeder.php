@@ -110,8 +110,7 @@ class ServiceSeeder extends Seeder
         ];
 
     foreach ($services as $service) {
-        $created = Service::create($service);
-        $created->save();
+        Service::create($service);
     }
     }
 }
