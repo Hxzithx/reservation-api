@@ -41,37 +41,38 @@ class OrderItem extends Model
     //Auto calculate total 
 
     protected static function booted(): void
-    {
-        static::creating(function ($item) {
-            $item->total_price = ($item->unit_price * $item->quantity) + $item->tax_amount;
-            $item->data        = self::buildData($item);
+{
+    static::creating(function ($item) {
+        $item->tax_amount  = $item->unit_price * $item->quantity * (optional(Product::find($item->product_id))->tax_rate / 100 ?? 0);
+        $item->total_price = ($item->unit_price * $item->quantity) + $item->tax_amount;
 
-            // Reduce stock
-            $product = Product::find($item->product_id);
-            if ($product && $product->track_stock) {
-                $product->decrement('stock_quantity', $item->quantity);
-            }
-        });
+        $item->data = self::buildData($item);
 
-        static::updating(function ($item) {
-            $item->total_price = ($item->unit_price * $item->quantity) + $item->tax_amount;
-            $item->data        = self::buildData($item);
-        });
-    }
+        $product = Product::find($item->product_id);
+        if ($product && $product->track_stock) {
+            $product->decrement('stock_quantity', $item->quantity);
+        }
+    });
 
-    private static function buildData($item): array
-    {
-        return [
-            'business_id' => $item->business_id,
-            'booking_id'  => $item->booking_id,
-            'product_id'  => $item->product_id,
-            'customer_id' => $item->customer_id,
-            'quantity'    => $item->quantity,
-            'unit_price'  => $item->unit_price,
-            'tax_amount'  => $item->tax_amount,
-            'total_price' => $item->total_price,
-            'status'      => $item->status,
-            'notes'       => $item->notes,
-        ];
-    }
+    static::updating(function ($item) {
+        $item->total_price = ($item->unit_price * $item->quantity) + $item->tax_amount;
+        $item->data = self::buildData($item);
+    });
+}
+
+private static function buildData($item): array
+{
+    return [
+        'business_id' => $item->business_id,
+        'booking_id'  => $item->booking_id,
+        'product_id'  => $item->product_id,
+        'customer_id' => $item->customer_id,
+        'quantity'    => $item->quantity,
+        'unit_price'  => $item->unit_price,
+        'tax_amount'  => $item->tax_amount,
+        'total_price' => $item->total_price, 
+        'status'      => $item->status,
+        'notes'       => $item->notes,
+    ];
+}
 }

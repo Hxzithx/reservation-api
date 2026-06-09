@@ -52,16 +52,16 @@ class SystemSetting extends Model
     }
 
     #[Override]
-    public static function booted(): void
-    {
-        static::creating(function ($systemSetting) {
-            $systemSetting->data = self::buildData($systemSetting);
-        });
+   protected static function booted(): void
+{
+    static::creating(function ($systemSetting) {
+        $systemSetting->data = self::buildData($systemSetting);
+    });
 
-        static::creating(function ($systemSetting) {
-            $systemSetting->data = self::buildData($systemSetting);
-        });
-    }
+    static::updating(function ($systemSetting) { 
+        $systemSetting->data = self::buildData($systemSetting);
+    });
+}
 
     private static function buildData($systemSetting): array
     {

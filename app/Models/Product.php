@@ -52,13 +52,13 @@ class Product extends Model
     protected static function booted(): void
     {
         static::creating(function ($product) {
-            $product->data         = self::buildData($product);
             $product->stock_status = self::calculateStockStatus($product);
+            $product->data         = self::buildData($product);
         });
 
         static::updating(function ($product) {
-            $product->data         = self::buildData($product);
             $product->stock_status = self::calculateStockStatus($product);
+            $product->data         = self::buildData($product);
         });
     }
 

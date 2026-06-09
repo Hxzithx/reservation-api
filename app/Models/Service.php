@@ -35,22 +35,19 @@ class Service extends Model
         'seasonal_availability',
 
         // Booking Rules
-        'booking_window_days',
-        'advance_notice_hours',
-        'free_cancel_hours',
+        'max_advance_booking',
+        'min_notice',
+        'cancellation_window',
         'max_bookings_per_day',
         'confirmation',
         'enable_waitlist',
         'min_group_size',
         'max_group_size',
 
-        // Staff
-        'skill_level_required',
 
         // Notifications
         'remind_before_minutes',
-        'reminder_channel',
-
+        
         // Custom Requirements
         'booking_requirements',
         'data',
@@ -107,17 +104,15 @@ class Service extends Model
             'available_from' => $service->available_from,
             'available_until' => $service->available_until,
             'seasonal_availability' => $service->seasonal_availability,
-            'booking_window_days' => $service->booking_window_days,
-            'advance_notice_hours' => $service->advance_notice_hours,
-            'free_cancel_hours' => $service->free_cancel_hours,
+            'max_advance_booking' => $service->max_advance_booking,
+            'min_notice' => $service->min_notice,
+            'cancellation_window' => $service->cancellation_window,
             'max_bookings_per_day' => $service->max_bookings_per_day,
             'confirmation' => $service->confirmation,
             'enable_waitlist' => $service->enable_waitlist,
             'min_group_size' => $service->min_group_size,
             'max_group_size' => $service->max_group_size,
-            'skill_level_required' => $service->skill_level_required,
             'remind_before_minutes' => $service->remind_before_minutes,
-            'reminder_channel' => $service->reminder_channel,
             'booking_requirements' => $service->booking_requirements,
         ];
     }
