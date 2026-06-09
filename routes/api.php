@@ -50,7 +50,7 @@ Route::prefix('/order-item')->group(function () {
     Route::post('/create', [OrderItemController::class, 'store']);
     Route::get('/{orderItem}', [OrderItemController::class, 'show']);
     Route::patch('/update', [OrderItemController::class, 'update']);
-    Route::get('/booking/{booking}', [OrderItemController::class, 'byBooking']); //get order by booking
+    Route::get('/booking/{booking}', [OrderItemController::class, 'byBooking']); //get order by bookingId
     Route::patch('/{orderItem}/status', [OrderItemController::class, 'updateStatus']);
 });
 //});
