@@ -11,7 +11,7 @@ class Service extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'business_id',
+        'company_id',
         'name',
         'description',
         'duration',
@@ -89,7 +89,7 @@ class Service extends Model
     private static function buildData($service): array
     {
         return [
-            'business_id' => $service->business_id,
+            'company_id' => $service->company_id,
             'name' => $service->name,
             'description' => $service->description,
             'duration' => $service->duration,
