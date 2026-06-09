@@ -10,7 +10,7 @@ class Resource extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        // 'business_id',
+        'company_id',
         'resource_type',
         'resource_name',
         'short_code',
@@ -57,7 +57,7 @@ class Resource extends Model
     private static function buildData($resource): array
     {
         $common = [
-            // 'business_id'   => $resource->business_id,
+            'company_id'   => $resource->company_id,
             'resource_type' => $resource->resource_type,
             'resource_name' => $resource->resource_name,
             'short_code'    => $resource->short_code,

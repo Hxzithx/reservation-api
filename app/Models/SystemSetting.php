@@ -39,6 +39,7 @@ class SystemSetting extends Model
         'is_delete',
         'created_user',
         'updated_by',
+        'data',
     ];
 
     protected function casts(): array
@@ -52,16 +53,16 @@ class SystemSetting extends Model
     }
 
     #[Override]
-   protected static function booted(): void
-{
-    static::creating(function ($systemSetting) {
-        $systemSetting->data = self::buildData($systemSetting);
-    });
+    protected static function booted(): void
+    {
+        static::creating(function ($systemSetting) {
+            $systemSetting->data = self::buildData($systemSetting);
+        });
 
-    static::updating(function ($systemSetting) { 
-        $systemSetting->data = self::buildData($systemSetting);
-    });
-}
+        static::updating(function ($systemSetting) {
+            $systemSetting->data = self::buildData($systemSetting);
+        });
+    }
 
     private static function buildData($systemSetting): array
     {

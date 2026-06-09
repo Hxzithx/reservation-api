@@ -11,7 +11,7 @@ class ProductSeeder extends Seeder
     {
         $products = [
             [
-                // 'company_id'     => 1,
+                'company_id'     => 1,
                 'name'            => 'Arrack',
                 'product_code'    => 'ARR-001',
                 'barcode'         => '6901234567001',
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'is_delete'       => false,
             ],
             [
-                // 'company_id'     => 1,
+                'company_id'     => 1,
                 'name'            => 'Water Bottle 500ml',
                 'product_code'    => 'WTR-500',
                 'barcode'         => '6901234567002',
@@ -45,7 +45,7 @@ class ProductSeeder extends Seeder
                 'is_delete'       => false,
             ],
             [
-                // 'company_id'     => 1,
+                'company_id'     => 1,
                 'name'            => 'Beer',
                 'product_code'    => 'BEE-001',
                 'barcode'         => '6901234567003',
@@ -62,7 +62,7 @@ class ProductSeeder extends Seeder
                 'is_delete'       => false,
             ],
             [
-                // 'company_id'     => 1,
+                'company_id'     => 1,
                 'name'            => 'Chocolate Bar',
                 'product_code'    => 'CHO-001',
                 'barcode'         => '6901234567004',
@@ -79,7 +79,7 @@ class ProductSeeder extends Seeder
                 'is_delete'       => false,
             ],
             [
-                // 'company_id'     => 1,
+                'company_id'     => 1,
                 'name'            => 'Shampoo',
                 'product_code'    => 'SHP-001',
                 'barcode'         => '6901234567005',
@@ -98,7 +98,8 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create($product);
+            $created = Product::create($product);
+            $created->save();
         }
     }
 }

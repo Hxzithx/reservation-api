@@ -10,7 +10,7 @@ class OrderItem extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        // 'business_id',
+        'company_id',
         'booking_id',
         'product_id',
         'customer_id',
@@ -63,7 +63,7 @@ class OrderItem extends Model
 private static function buildData($item): array
 {
     return [
-        'business_id' => $item->business_id,
+        'company_id' => $item->company_id,
         'booking_id'  => $item->booking_id,
         'product_id'  => $item->product_id,
         'customer_id' => $item->customer_id,

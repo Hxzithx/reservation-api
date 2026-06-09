@@ -36,4 +36,5 @@ class SystemSettingSeeder extends Seeder
             'is_delete'            => false,
         ]);
     }
+    
 }

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->string('resource_type');
             $table->string('resource_name', 80);
             $table->string('short_code', 10)->nullable()->unique();
