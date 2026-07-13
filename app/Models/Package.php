@@ -117,7 +117,7 @@ class Package extends Model
     private static function buildData($package): array
     {
         return [
-            'company_id'         => $package->company_id,
+            'company_id'          => $package->company_id,
             'name'                => $package->name,
             'package_code'        => $package->package_code,
             'description'         => $package->description,
