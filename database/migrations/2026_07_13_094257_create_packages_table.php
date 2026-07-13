@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('business_id');
+            $table->unsignedBigInteger('company_id');
 
             $table->string('name');
             $table->string('package_code')->nullable()->unique();
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('business_id')->references('id')->on('businesses')->cascadeOnDelete();
+            // $table->foreign('company_id')->references('id')->on('businesses')->cascadeOnDelete();
             $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();
         });
