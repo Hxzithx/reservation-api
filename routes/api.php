@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\ServiceController;
@@ -52,5 +53,13 @@ Route::prefix('/order-item')->group(function () {
     Route::patch('/update', [OrderItemController::class, 'update']);
     Route::get('/booking/{booking}', [OrderItemController::class, 'byBooking']); //get order by bookingId
     Route::patch('/{orderItem}/status', [OrderItemController::class, 'updateStatus']);
+});
+Route::prefix('/package')->group(function () {
+    Route::get('/', [PackageController::class, 'index']);
+    Route::post('/', [PackageController::class, 'store']);
+    Route::get('/{package}', [PackageController::class, 'show']);
+    Route::patch('/update', [PackageController::class, 'update']);
+    Route::get('/active', [PackageController::class, 'active']);
+    Route::delete('/{package}', [PackageController::class, 'destroy']);
 });
 //});

@@ -22,7 +22,6 @@ class PackageController extends Controller implements HasMiddleware
         ];
     }
 
-    // GET /packages
     public function index(Request $request)
     {
         try {
@@ -49,7 +48,7 @@ class PackageController extends Controller implements HasMiddleware
         }
     }
 
-    // POST /packages
+
     public function store(Request $request)
     {
         try {
@@ -123,7 +122,6 @@ class PackageController extends Controller implements HasMiddleware
         }
     }
 
-    // GET /packages/{package}
     public function show(Package $package)
     {
         try {
@@ -151,7 +149,6 @@ class PackageController extends Controller implements HasMiddleware
         }
     }
 
-    // PUT /packages/{package}
     public function update(Request $request, Package $package)
     {
         try {
@@ -273,7 +270,6 @@ class PackageController extends Controller implements HasMiddleware
         }
     }
 
-    // GET /packages/active
     public function active(Request $request)
     {
         try {
