@@ -27,9 +27,7 @@ class PackageController extends Controller implements HasMiddleware
         try {
             // Gate::authorize('viewAny', Package::class);
 
-            $packages = Package::where('business_id', $request->business_id)
-                ->where('is_delete', false)
-                ->get();
+            $packages = Package::where('is_delete', false)->get();
 
             return response()->json([
                 'message'  => 'Packages retrieved successfully',
@@ -55,7 +53,7 @@ class PackageController extends Controller implements HasMiddleware
             // Gate::authorize('create', Package::class);
 
             $fields = $request->validate([
-                'company_id'                        => 'required|exists:businesses,id',
+                // 'company_id'                        => 'required',
                 'name'                              => 'required|string|max:255',
                 'description'                       => 'nullable|string|max:500',
                 'package_type'                      => 'nullable|string|max:255',
@@ -275,8 +273,7 @@ class PackageController extends Controller implements HasMiddleware
         try {
             $now = now()->toDateString();
 
-            $packages = Package::where('business_id', $request->business_id)
-                ->where('is_delete', false)
+            $packages = Package::where('is_delete', false)
                 ->where('is_active', true)
                 ->where(function ($query) use ($now) {
                     $query->whereNull('valid_from')
