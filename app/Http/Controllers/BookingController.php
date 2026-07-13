@@ -8,9 +8,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use Exception;
-use Illuminate\Support\Facades\Gate;
 
 class BookingController extends Controller implements HasMiddleware
 {
