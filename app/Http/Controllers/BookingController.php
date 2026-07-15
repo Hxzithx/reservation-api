@@ -49,7 +49,7 @@ class BookingController extends Controller implements HasMiddleware
             // Gate::authorize('create', Booking::class);
 
             $fields = $request->validate([
-                // 'business_id'              => 'required|exists:businesses,id',
+                //'conpany_id'              => 'required|exists:system_setting,id',
                 'customer_id'              => 'required_if:guest_booking,No , Linked to account|nullable|exists:users,id',
                 'service_id'               => 'required|exists:services,id',
                 'resource_id'              => 'required|exists:resources,id',
@@ -282,7 +282,7 @@ class BookingController extends Controller implements HasMiddleware
                 'per_page'    => 'nullable|integer|min:1|max:100',
             ]);
 
-            $query = Booking::where('business_id', $fields['business_id'])
+            $query = Booking::where('company_id', $fields['company_id'])
                 ->where('is_delete', false);
 
             // Filter by customer

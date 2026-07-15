@@ -21,13 +21,12 @@ class OrderItemController extends Controller implements HasMiddleware
         ];
     }
 
-    // GET /order-items
     public function index(Request $request)
     {
         try {
             // Gate::authorize('viewAny', OrderItem::class);
 
-            // $orderItems = OrderItem::where('business_id', $request->business_id)
+            // $orderItems = OrderItem::where('company_id', $request->company_id)
             //     ->where('is_delete', false)
             //     ->with(['product', 'booking', 'customer'])
             //     ->get();
@@ -50,7 +49,6 @@ class OrderItemController extends Controller implements HasMiddleware
         }
     }
 
-    // POST /order-items
     public function store(Request $request)
     {
         try {
@@ -131,7 +129,6 @@ class OrderItemController extends Controller implements HasMiddleware
         }
     }
 
-    // GET /order-items/{orderItem}
     public function show(OrderItem $orderItem)
     {
         try {
@@ -159,7 +156,6 @@ class OrderItemController extends Controller implements HasMiddleware
         }
     }
 
-    // PUT /order-items/{orderItem}
     public function update(Request $request, OrderItem $orderItem)
     {
         try {
@@ -232,7 +228,6 @@ class OrderItemController extends Controller implements HasMiddleware
         }
     }
 
-    // DELETE /order-items/{orderItem}
     public function destroy(OrderItem $orderItem)
     {
         try {
@@ -268,7 +263,6 @@ class OrderItemController extends Controller implements HasMiddleware
         }
     }
 
-    // GET /order-items/booking/{booking}
     public function byBooking(Booking $booking)
     {
         try {
@@ -301,7 +295,6 @@ class OrderItemController extends Controller implements HasMiddleware
         }
     }
 
-    // PATCH /order-items/{orderItem}/status
     public function updateStatus(Request $request, OrderItem $orderItem)
     {
         try {

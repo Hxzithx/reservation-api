@@ -75,7 +75,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // $table->foreign('company_id')->references('id')->on('businesses')->cascadeOnDelete();
+            // $table->foreign('company_id')->references('id')->on('system_setting')->cascadeOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
             $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();
