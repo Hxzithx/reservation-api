@@ -62,4 +62,5 @@ Route::prefix('/package')->group(function () {
     Route::get('/active', [PackageController::class, 'active']);
     Route::delete('/{package}', [PackageController::class, 'destroy']);
 });
+
 //});

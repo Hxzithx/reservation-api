@@ -161,4 +161,5 @@ class Package extends Model
     {
         return $this->original_price - $this->package_price;
     }
+    
 }

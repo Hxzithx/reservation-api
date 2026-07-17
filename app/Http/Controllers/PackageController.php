@@ -223,6 +223,7 @@ class PackageController extends Controller implements HasMiddleware
             ], 500);
         }
     }
+    
 
     public function destroy(Package $package)
     {
