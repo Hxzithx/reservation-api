@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('amenities')->nullable();
 
             //equipment
-            $table->enum('equipment_category', ['Audio / PA', 'Lighting', 'Medical device', 'Kitchen equipment', 'Sport gear', 'Other'])->default('Audio / PA');
+            $table->string('equipment_category');
             $table->string('brand_model')->nullable();
             $table->string('serial_number')->nullable();
             $table->enum('condition', ['Excellent', 'Good', 'Fair', 'Needs to service'])->default('Excellent'); 
@@ -45,8 +45,8 @@ return new class extends Migration
             $table->decimal('deposit_required', 10, 2)->nullable();
 
             //time slot
-            $table->enum('slot_category', ['Appointment', 'Class / Group session', 'Consultation', 'Delivery / pickup'])->default('Appointment'); 
-            $table->enum('virtual_type', ['Virtual only', 'In-person only', 'Both available'])->default('Virtual only');
+            $table->string('slot_category')->default('Appointment'); 
+            $table->string('virtual_type')->default('Virtual only');
             $table->string('video_link')->nullable();
             $table->integer('max_group_size')->nullable();
 

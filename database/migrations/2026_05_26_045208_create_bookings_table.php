@@ -67,12 +67,7 @@ return new class extends Migration
 
             $table->string('discount_code')->nullable();
             $table->integer('loyalty_points')->default(0);
-            $table->enum('currency', [
-                'LKR - Sri Lankan Rupee',
-                'USD - US Dollar',
-                'EUR - Euro',
-                'AUD - Australian Dollar',
-            ])->default('LKR - Sri Lankan Rupee');
+            $table->string('currency')->default('LKR');
             $table->decimal('total_amount', 10, 2)->default(0);
             $table->text('special_instructions')->nullable();
             $table->boolean('is_delete')->default(false);
