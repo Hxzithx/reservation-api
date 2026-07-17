@@ -8,9 +8,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use Exception;
-use Illuminate\Support\Facades\Gate;
 
 class BookingController extends Controller implements HasMiddleware
 {
@@ -51,7 +49,7 @@ class BookingController extends Controller implements HasMiddleware
             // Gate::authorize('create', Booking::class);
 
             $fields = $request->validate([
-                // 'business_id'              => 'required|exists:businesses,id',
+                //'conpany_id'              => 'required|exists:system_setting,id',
                 'customer_id'              => 'required_if:guest_booking,No , Linked to account|nullable|exists:users,id',
                 'service_id'               => 'required|exists:services,id',
                 'resource_id'              => 'required|exists:resources,id',
@@ -59,7 +57,7 @@ class BookingController extends Controller implements HasMiddleware
                 'guest_booking'            => 'required|in:No , Linked to account,Yes , Guest only',
                 'guest_name'               => 'required_if:guest_booking,Yes , Guest only|nullable|string|max:255',
                 'guest_email'              => 'required_if:guest_booking,Yes , Guest only|nullable|email|max:255',
-                'booking_channel'          => 'required|in:online,walk_in,phone,api,whatsapp',
+                'booking_channel'          => 'required',
 
                 'date'                     => 'required|date',
                 'start_time'               => 'required|date_format:Y-m-d H:i:s',
@@ -145,7 +143,7 @@ class BookingController extends Controller implements HasMiddleware
                 'guest_booking'            => 'sometimes|required|in:No , Linked to account,Yes , Guest only',
                 'guest_name'               => 'sometimes|nullable|string|max:255',
                 'guest_email'              => 'sometimes|nullable|email|max:255',
-                'booking_channel'          => 'sometimes|required|in:online,walk_in,phone,api,whatsapp',
+                'booking_channel'          => 'sometimes|required',
 
                 'date'                     => 'sometimes|required|date',
                 'start_time'               => 'sometimes|required|date_format:Y-m-d H:i:s',
@@ -284,7 +282,7 @@ class BookingController extends Controller implements HasMiddleware
                 'per_page'    => 'nullable|integer|min:1|max:100',
             ]);
 
-            $query = Booking::where('business_id', $fields['business_id'])
+            $query = Booking::where('company_id', $fields['company_id'])
                 ->where('is_delete', false);
 
             // Filter by customer

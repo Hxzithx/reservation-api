@@ -56,7 +56,7 @@ class ProductController extends Controller implements HasMiddleware
             // Gate::authorize('create', Product::class);
 
             $fields = $request->validate([
-                'company_id'     => 'required|exists:businesses,id',
+                'company_id'     => 'required|exists:system_setting,id',
                 'name'            => 'required|string|max:255',
                 'product_code'    => 'nullable|string|max:50|unique:products,product_code',
                 'barcode'         => 'nullable|string|max:50|unique:products,barcode',
@@ -273,7 +273,7 @@ class ProductController extends Controller implements HasMiddleware
     public function lowStock(Request $request)
     {
         try {
-            $products = Product::where('business_id', $request->business_id)
+            $products = Product::where('company_id', $request->company_id)
                 ->where('is_delete', false)
                 ->where('track_stock', true)
                 ->whereIn('stock_status', ['low_stock', 'out_of_stock'])

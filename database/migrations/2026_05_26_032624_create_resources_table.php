@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('amenities')->nullable();
 
             //equipment
-            $table->enum('equipment_category', ['Audio / PA', 'Lighting', 'Medical device', 'Kitchen equipment', 'Sport gear', 'Other'])->default('Audio / PA');
+            $table->string('equipment_category');
             $table->string('brand_model')->nullable();
             $table->string('serial_number')->nullable();
             $table->enum('condition', ['Excellent', 'Good', 'Fair', 'Needs to service'])->default('Excellent'); 
@@ -45,8 +45,8 @@ return new class extends Migration
             $table->decimal('deposit_required', 10, 2)->nullable();
 
             //time slot
-            $table->enum('slot_category', ['Appointment', 'Class / Group session', 'Consultation', 'Delivery / pickup'])->default('Appointment'); 
-            $table->enum('virtual_type', ['Virtual only', 'In-person only', 'Both available'])->default('Virtual only');
+            $table->string('slot_category')->default('Appointment'); 
+            $table->string('virtual_type')->default('Virtual only');
             $table->string('video_link')->nullable();
             $table->integer('max_group_size')->nullable();
 
@@ -75,7 +75,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // $table->foreign('company_id')->references('id')->on('businesses')->cascadeOnDelete();
+            // $table->foreign('company_id')->references('id')->on('system_setting')->cascadeOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
             $table->foreign('created_user')->references('id')->on('users')->nullOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')->nullOnDelete();

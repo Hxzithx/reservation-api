@@ -13,20 +13,14 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('business_id');
+            // $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('service_id');
             $table->unsignedBigInteger('resource_id');
 
             $table->string('booking_reference')->unique();
             $table->enum('guest_booking', ['No , Linked to account', 'Yes , Guest only']);
-            $table->enum('booking_channel', [
-                'online',
-                'walk_in',
-                'phone',
-                'api',
-                'whatsapp',
-            ])->default('online');
+            $table->string('booking_channel')->default('online');
 
             $table->date('date');
             $table->dateTime('start_time');
@@ -67,12 +61,7 @@ return new class extends Migration
 
             $table->string('discount_code')->nullable();
             $table->integer('loyalty_points')->default(0);
-            $table->enum('currency', [
-                'LKR - Sri Lankan Rupee',
-                'USD - US Dollar',
-                'EUR - Euro',
-                'AUD - Australian Dollar',
-            ])->default('LKR - Sri Lankan Rupee');
+            $table->string('currency')->default('LKR');
             $table->decimal('total_amount', 10, 2)->default(0);
             $table->text('special_instructions')->nullable();
             $table->boolean('is_delete')->default(false);
@@ -81,7 +70,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // $table->foreign('business_id')->references('id')->on('businesses')->cascadeOnDelete();
+            // $table->foreign('conpany_id')->references('id')->on('system_setting')->cascadeOnDelete();
             $table->foreign('customer_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('service_id')->references('id')->on('services')->cascadeOnDelete();
             $table->foreign('resource_id')->references('id')->on('resources')->cascadeOnDelete();

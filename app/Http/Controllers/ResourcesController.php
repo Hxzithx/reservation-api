@@ -56,7 +56,7 @@ class ResourcesController extends Controller implements HasMiddleware
             $fields = $request->validate([
                 // 'company_id'               => 'required|exists:businesses,id',
 
-                'resource_type'             => 'required|in:person,room,equipment,timeslot',
+                'resource_type'             => 'required',
                 'resource_name'             => 'required|string|max:80',
                 'short_code'                => 'nullable|string|max:10|unique:resources,short_code',
                 'capacity'                  => 'nullable|integer|min:1',
@@ -80,15 +80,15 @@ class ResourcesController extends Controller implements HasMiddleware
                 'min_stay'                  => 'nullable|integer|min:1',
                 'amenities'                 => 'nullable|string|max:255',
 
-                'equipment_category'        => 'nullable|in:Audio / PA,Lighting,Medical device,Kitchen equipment,Sport gear,Other',
+                'equipment_category'        => 'nullable',
                 'brand_model'               => 'nullable|string|max:255',
                 'serial_number'             => 'nullable|string|max:255',
-                'condition'                 => 'nullable|in:Excellent,Good,Fair,Needs to service',
+                'condition'                 => 'nullable',
                 'hire_rate'                 => 'nullable|numeric|min:0',
                 'deposit_required'          => 'nullable|numeric|min:0',
 
-                'slot_category'             => 'nullable|in:Appointment,Class / Group session,Consultation,Delivery / pickup',
-                'virtual_type'              => 'nullable|in:Virtual only,In-person only,Both available',
+                'slot_category'             => 'nullable',
+                'virtual_type'              => 'nullable',
                 'video_link'                => 'nullable|url|max:255',
                 'max_group_size'            => 'nullable|integer|min:1',
 
@@ -181,7 +181,7 @@ class ResourcesController extends Controller implements HasMiddleware
             // Gate::authorize('update', $resource);
 
             $fields = $request->validate([
-                'resource_type'             => 'sometimes|required|in:person,room,equipment,timeslot',
+                'resource_type'             => 'sometimes|required',
                 'resource_name'             => 'sometimes|required|string|max:80',
                 'short_code'                => 'sometimes|nullable|string|max:10|unique:resources,short_code,' . $resource->id,
                 'capacity'                  => 'sometimes|nullable|integer|min:1',
@@ -205,15 +205,15 @@ class ResourcesController extends Controller implements HasMiddleware
                 'min_stay'                  => 'sometimes|nullable|integer|min:1',
                 'amenities'                 => 'sometimes|nullable|string|max:255',
 
-                'equipment_category'        => 'sometimes|nullable|in:Audio / PA,Lighting,Medical device,Kitchen equipment,Sport gear,Other',
+                'equipment_category'        => 'sometimes|nullable',
                 'brand_model'               => 'sometimes|nullable|string|max:255',
                 'serial_number'             => 'sometimes|nullable|string|max:255',
-                'condition'                 => 'sometimes|nullable|in:Excellent,Good,Fair,Needs to service',
+                'condition'                 => 'sometimes|nullable',
                 'hire_rate'                 => 'sometimes|nullable|numeric|min:0',
                 'deposit_required'          => 'sometimes|nullable|numeric|min:0',
 
-                'slot_category'             => 'sometimes|nullable|in:Appointment,Class / Group session,Consultation,Delivery / pickup',
-                'virtual_type'              => 'sometimes|nullable|in:Virtual only,In-person only,Both available',
+                'slot_category'             => 'sometimes|nullable',
+                'virtual_type'              => 'sometimes|nullable',
                 'video_link'                => 'sometimes|nullable|url|max:255',
                 'max_group_size'            => 'sometimes|nullable|integer|min:1',
 
