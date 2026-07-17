@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SystemSettingController;
-use App\Models\OrderItem;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,29 +18,31 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('/services')->group(function () {
     Route::get('/', [ServiceController::class, 'index']);
-    Route::post('/create', [ServiceController::class, 'store']);
+    Route::post('/', [ServiceController::class, 'store']);
+    Route::patch('/{service}', [ServiceController::class, 'update']);
 });
 Route::prefix('/resources')->group(function () {
     Route::get('/', [ResourcesController::class, 'index']);
-    Route::post('/create', [ResourcesController::class, 'store']);
+    Route::post('/', [ResourcesController::class, 'store']);
+    Route::patch('/{resource}', [ResourcesController::class, 'update']);
 });
 Route::prefix('/booking')->group(function () {
     Route::get('/', [BookingController::class, 'index']);
-    Route::post('/create', [BookingController::class, 'store']);
-    Route::patch('/update', [BookingController::class, 'update']);
+    Route::post('/', [BookingController::class, 'store']);
+    Route::patch('/{booking}', [BookingController::class, 'update']);
     Route::patch('/{booking}/status', [BookingController::class, 'updateStatus']);
     Route::get('/history', [BookingController::class, 'search']);
 });
 Route::prefix('/system-setting')->group(function () {
     Route::get('/', [SystemSettingController::class, 'index']);
-    Route::post('/create', [SystemSettingController::class, 'store']);
-    Route::patch('/update', [SystemSettingController::class, 'update']);
+    Route::post('/', [SystemSettingController::class, 'store']);
+    Route::patch('/{systemSetting}', [SystemSettingController::class, 'update']);
 });
 Route::prefix('/products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
-    Route::get('/create', [ProductController::class, 'store']);
-    Route::patch('/update', [ProductController::class, 'update']);
-    Route::get('{product}', [ProductController::class, 'show']);
+    Route::get('/', [ProductController::class, 'store']);
+    Route::patch('/{product}', [ProductController::class, 'update']);
+    Route::get('/{product}', [ProductController::class, 'show']);
     Route::patch('/{product}/stock', [ProductController::class, 'updateStock']);
     Route::get('/low-stock', [ProductController::class, 'lowStock']);
 });
@@ -50,7 +51,15 @@ Route::prefix('/order-item')->group(function () {
     Route::post('/create', [OrderItemController::class, 'store']);
     Route::get('/{orderItem}', [OrderItemController::class, 'show']);
     Route::patch('/update', [OrderItemController::class, 'update']);
-    Route::get('/booking/{booking}', [OrderItemController::class, 'byBooking']); //get order by booking
+    Route::get('/booking/{booking}', [OrderItemController::class, 'byBooking']); //get order by bookingId
     Route::patch('/{orderItem}/status', [OrderItemController::class, 'updateStatus']);
+});
+Route::prefix('/package')->group(function () {
+    Route::get('/', [PackageController::class, 'index']);
+    Route::post('/', [PackageController::class, 'store']);
+    Route::get('/{package}', [PackageController::class, 'show']);
+    Route::patch('/{package}', [PackageController::class, 'update']);
+    Route::get('/active', [PackageController::class, 'active']);
+    Route::delete('/{package}', [PackageController::class, 'destroy']);
 });
 //});
