@@ -20,13 +20,7 @@ return new class extends Migration
 
             $table->string('booking_reference')->unique();
             $table->enum('guest_booking', ['No , Linked to account', 'Yes , Guest only']);
-            $table->enum('booking_channel', [
-                'online',
-                'walk_in',
-                'phone',
-                'api',
-                'whatsapp',
-            ])->default('online');
+            $table->string('booking_channel')->default('online');
 
             $table->date('date');
             $table->dateTime('start_time');

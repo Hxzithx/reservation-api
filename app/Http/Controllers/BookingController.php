@@ -57,7 +57,7 @@ class BookingController extends Controller implements HasMiddleware
                 'guest_booking'            => 'required|in:No , Linked to account,Yes , Guest only',
                 'guest_name'               => 'required_if:guest_booking,Yes , Guest only|nullable|string|max:255',
                 'guest_email'              => 'required_if:guest_booking,Yes , Guest only|nullable|email|max:255',
-                'booking_channel'          => 'required|in:online,walk_in,phone,api,whatsapp',
+                'booking_channel'          => 'required',
 
                 'date'                     => 'required|date',
                 'start_time'               => 'required|date_format:Y-m-d H:i:s',
@@ -143,7 +143,7 @@ class BookingController extends Controller implements HasMiddleware
                 'guest_booking'            => 'sometimes|required|in:No , Linked to account,Yes , Guest only',
                 'guest_name'               => 'sometimes|nullable|string|max:255',
                 'guest_email'              => 'sometimes|nullable|email|max:255',
-                'booking_channel'          => 'sometimes|required|in:online,walk_in,phone,api,whatsapp',
+                'booking_channel'          => 'sometimes|required',
 
                 'date'                     => 'sometimes|required|date',
                 'start_time'               => 'sometimes|required|date_format:Y-m-d H:i:s',
